@@ -42,8 +42,8 @@ class block_chat extends block_base {
         }
 
         $this->content = new stdClass;
-        $this->content->text = 'The content of our SimpleHTML block!';
-        $this->content->footer = 'Footer here...';
+        $this->content->text = '';
+        $this->content->footer = '';
         $this->chatPrintChat(true);
         $params = new stdClass();
         $params->chatAjaxUrl = "$CFG->wwwroot/local/chat/ajax.php";
