@@ -16,14 +16,14 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Strings for component 'block_online_users', language 'en', branch 'MOODLE_20_STABLE'
+ * Strings for component 'block_chat', language 'en', branch 'MOODLE_20_STABLE'
  *
- * @package   block_online_users
+ * @package   block_chat
  * @copyright 1999 onwards Martin Dougiamas  {@link http://moodle.com}
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['chat:addinstance'] = 'Add a new online users block';
-$string['chat:myaddinstance'] = 'Add a new online users block to Dashboard';
-$string['chat:viewlist'] = 'View list of online users';
+$string['chat:addinstance'] = 'Add a new chat block';
+$string['chat:myaddinstance'] = 'Add a new chat block to Dashboard';
+$string['chat:viewlist'] = 'View list of chat';
 $string['pluginname'] = 'chat';

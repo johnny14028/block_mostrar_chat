@@ -22,14 +22,14 @@
  * @copyright  1999 onwards Martin Dougiamas (http://dougiamas.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-use block_online_users\fetcher;
+
 
 /**
  * This block needs to be reworked.
  * The new roles system does away with the concepts of rigid student and
  * teacher roles.
  */
-class block_online_users extends block_base {
+class block_chat extends block_base {
 
     function init() {
         $this->title = get_string('pluginname', 'block_chat');
