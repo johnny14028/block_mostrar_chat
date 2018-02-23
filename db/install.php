@@ -3,15 +3,14 @@
 function xmldb_block_chat_install()
 {
     global $DB, $USER;
-    //obtenemos el contexto de usuario
-    $context_user = context_user::instance($USER->id);
     //listamos los usuarios activos de la plataforma
-    $users = $DB->get_records('users',['deleted'=>0,'suspended'=>0]);
-    $objBlockInstanceExist =  $DB->get_record('block_instances',['parentconteextid'=>$context_user->id], '*', IGNORE_MULTIPLE);
+    $users = $DB->get_records('user',['deleted'=>0,'suspended'=>0]);
+    $objBlockInstanceExist =  $DB->get_record('block_instances',['parentcontextid'=>$context_user->id], '*', IGNORE_MULTIPLE);
     if(is_array($users) && count($users)>0){
         foreach($users as $index=>$objUser){
+            $context_user = context_user::instance($objUser->id);
             //validamos si tiene un registro de usuario
-            $objBlockInstance =  $DB->get_record('block_instances',['blockname'=>'chat','parentconteextid'=>$context_user->id]);
+            $objBlockInstance =  $DB->get_record('block_instances',['blockname'=>'chat','parentcontextid'=>$context_user->id]);
             if(!is_object($objBlockInstance)){
                 //registramos el blocke
                 $objBlockChatBean = new stdClass();
