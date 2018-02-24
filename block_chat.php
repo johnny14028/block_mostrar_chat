@@ -23,7 +23,6 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-
 /**
  * This block needs to be reworked.
  * The new roles system does away with the concepts of rigid student and
@@ -40,16 +39,17 @@ class block_chat extends block_base {
         if ($this->content !== null) {
             return $this->content;
         }
-
-        $this->content = new stdClass;
-        $this->content->text = '';
-        $this->content->footer = '';
-        $this->chatPrintChat(true);
-        $params = new stdClass();
-        $params->chatAjaxUrl = "$CFG->wwwroot/local/chat/ajax.php";
-        $params->chatTimer = 3000;	
-        $params->chatCourseid = $COURSE->id;	
-        $PAGE->requires->js_call_amd('local_chat/chat', 'init', array($params));
+        if (isloggedin() and ! isguestuser()) {
+            $this->content = new stdClass;
+            $this->content->text = '';
+            $this->content->footer = '';
+            $this->chatPrintChat(true);
+            $params = new stdClass();
+            $params->chatAjaxUrl = "$CFG->wwwroot/local/chat/ajax.php";
+            $params->chatTimer = 3000;
+            $params->chatCourseid = $COURSE->id;
+            $PAGE->requires->js_call_amd('local_chat/chat', 'init', array($params));
+        }
         return $this->content;
     }
 
