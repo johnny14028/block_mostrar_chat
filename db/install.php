@@ -19,7 +19,7 @@ function xmldb_block_chat_install()
                 $objBlockChatBean->parentcontextid = $context_user->id;
                 $objBlockChatBean->showinsubcontexts = 0;
                 $objBlockChatBean->requiredbytheme = 0;
-                $objBlockChatBean->pagetypepattern = 'my-index';
+                $objBlockChatBean->pagetypepattern = 'site-index';
                 $objBlockChatBean->subpagepattern = isset($objBlockInstanceExist->subpagepattern)?$objBlockInstanceExist->subpagepattern:NULL;
                 $objBlockChatBean->defaultregion = 'side-pre';
                 $objBlockChatBean->defaultweight = 5;
