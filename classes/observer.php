@@ -33,29 +33,29 @@ defined('MOODLE_INTERNAL') || die();
  */
 class block_chat_observer {
 
-    public static function user_created(\core\event\user_created $event) {
-        global $DB;
-        //validar restricciones para usuarios que no sean administradores
-            $context_user = context_user::instance($event->objectid);
-            $objBlockInstanceExist =  $DB->get_record('block_instances',['parentcontextid'=>$context_user->id], '*', IGNORE_MULTIPLE);
-            //validamos si tiene un registro de usuario
-            $objBlockInstance =  $DB->get_record('block_instances',['blockname'=>'chat','parentcontextid'=>$context_user->id]);
-            if(!is_object($objBlockInstance)){
-                //registramos el blocke
-                $objBlockChatBean = new stdClass();
-                $objBlockChatBean->blockname = 'chat';
-                $objBlockChatBean->parentcontextid = $context_user->id;
-                $objBlockChatBean->showinsubcontexts = 0;
-                $objBlockChatBean->requiredbytheme = 0;
-                $objBlockChatBean->pagetypepattern = 'my-index';
-                $objBlockChatBean->subpagepattern = isset($objBlockInstanceExist->subpagepattern)?$objBlockInstanceExist->subpagepattern:NULL;
-                $objBlockChatBean->defaultregion = 'side-pre';
-                $objBlockChatBean->defaultweight = 5;
-                $objBlockChatBean->configdata = '';
-                $objBlockChatBean->timecreated = time();
-                $objBlockChatBean->timemodified = time();
-                $DB->insert_record('block_instances',$objBlockChatBean);
-            }        
+    public static function course_created(\core\event\course_created $event) {
+        global $DB, $USER;
+        //$course = get_course($event->courseid);
+        $context_course = context_course::instance($event->courseid);
+        $objBlockInstanceExist = $DB->get_record('block_instances', ['parentcontextid' => $context_course->id], '*', IGNORE_MULTIPLE);
+        //validamos si tiene un registro de usuario
+        $objBlockInstance = $DB->get_record('block_instances', ['blockname' => 'chat', 'parentcontextid' => $context_course->id]);
+        if (!is_object($objBlockInstance)) {
+            //registramos el blocke
+            $objBlockChatBean = new stdClass();
+            $objBlockChatBean->blockname = 'chat';
+            $objBlockChatBean->parentcontextid = $context_course->id;
+            $objBlockChatBean->showinsubcontexts = 0;
+            $objBlockChatBean->requiredbytheme = 0;
+            $objBlockChatBean->pagetypepattern = 'course-view-*';
+            $objBlockChatBean->subpagepattern = isset($objBlockInstanceExist->subpagepattern) ? $objBlockInstanceExist->subpagepattern : NULL;
+            $objBlockChatBean->defaultregion = 'side-pre';
+            $objBlockChatBean->defaultweight = 5;
+            $objBlockChatBean->configdata = '';
+            $objBlockChatBean->timecreated = time();
+            $objBlockChatBean->timemodified = time();
+            $DB->insert_record('block_instances', $objBlockChatBean);
+        }
     }
 
 }

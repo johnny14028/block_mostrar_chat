@@ -4,31 +4,31 @@ function xmldb_block_chat_install()
 {
     global $DB, $USER;
     //listamos los usuarios activos de la plataforma
-//    $users = $DB->get_records('user',['deleted'=>0,'suspended'=>0]);
+    $courses = $DB->get_records_sql("SELECT * FROM {course} WHERE category > 0");
 //    
-//    if(is_array($users) && count($users)>0){
-//        foreach($users as $index=>$objUser){
-//            $context_user = context_user::instance($objUser->id);
-//            $objBlockInstanceExist =  $DB->get_record('block_instances',['parentcontextid'=>$context_user->id], '*', IGNORE_MULTIPLE);
-//            //validamos si tiene un registro de usuario
-//            $objBlockInstance =  $DB->get_record('block_instances',['blockname'=>'chat','parentcontextid'=>$context_user->id]);
-//            if(!is_object($objBlockInstance)){
-//                //registramos el blocke
-//                $objBlockChatBean = new stdClass();
-//                $objBlockChatBean->blockname = 'chat';
-//                $objBlockChatBean->parentcontextid = $context_user->id;
-//                $objBlockChatBean->showinsubcontexts = 0;
-//                $objBlockChatBean->requiredbytheme = 0;
-//                $objBlockChatBean->pagetypepattern = 'site-index';
-//                $objBlockChatBean->subpagepattern = isset($objBlockInstanceExist->subpagepattern)?$objBlockInstanceExist->subpagepattern:NULL;
-//                $objBlockChatBean->defaultregion = 'side-pre';
-//                $objBlockChatBean->defaultweight = 5;
-//                $objBlockChatBean->configdata = '';
-//                $objBlockChatBean->timecreated = time();
-//                $objBlockChatBean->timemodified = time();
-//                $DB->insert_record('block_instances',$objBlockChatBean);
-//            }
-//        }
-//    }
+    if(is_array($courses) && count($courses)>0){
+        foreach($courses as $index=>$objCourse){
+            $context_course = context_course::instance($objCourse->id);
+            $objBlockInstanceExist =  $DB->get_record('block_instances',['parentcontextid'=>$context_course->id], '*', IGNORE_MULTIPLE);
+            //validamos si tiene un registro de usuario
+            $objBlockInstance =  $DB->get_record('block_instances',['blockname'=>'chat','parentcontextid'=>$context_course->id]);
+            if(!is_object($objBlockInstance)){
+                //registramos el blocke
+                $objBlockChatBean = new stdClass();
+                $objBlockChatBean->blockname = 'chat';
+                $objBlockChatBean->parentcontextid = $context_course->id;
+                $objBlockChatBean->showinsubcontexts = 0;
+                $objBlockChatBean->requiredbytheme = 0;
+                $objBlockChatBean->pagetypepattern = 'course-view-*';
+                $objBlockChatBean->subpagepattern = isset($objBlockInstanceExist->subpagepattern)?$objBlockInstanceExist->subpagepattern:NULL;
+                $objBlockChatBean->defaultregion = 'side-pre';
+                $objBlockChatBean->defaultweight = 5;
+                $objBlockChatBean->configdata = '';
+                $objBlockChatBean->timecreated = time();
+                $objBlockChatBean->timemodified = time();
+                $DB->insert_record('block_instances',$objBlockChatBean);
+            }
+        }
+    }
     return true;    
 }
