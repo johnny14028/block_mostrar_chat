@@ -17,7 +17,7 @@
 // @website		www.sebale.net
 
 $observers = [
-        ['eventname' => '\core\event\user_created',
-        'callback' => 'block_chat_observer::user_created',]
+        ['eventname' => '\core\event\course_created',
+        'callback' => 'block_chat_observer::course_created',]
 
         ];
