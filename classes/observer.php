@@ -40,7 +40,6 @@ class block_chat_observer {
         $objBlockInstanceExist = $DB->get_record('block_instances', ['parentcontextid' => $context_course->id], '*', IGNORE_MULTIPLE);
         //validamos si tiene un registro de usuario
         $objBlockInstance = $DB->get_record('block_instances', ['blockname' => 'chat', 'parentcontextid' => $context_course->id]);
-        error_log(print_r($objBlockInstance, true));
         if (!is_object($objBlockInstance)) {
             //registramos el blocke
             $objBlockChatBean = new stdClass();
