@@ -90,7 +90,8 @@ class block_chat extends block_base {
         $output .= '<div class="chat-conversation" id="chat-conversation" user-id="0"></div>';
         $output .= '<div class="chat-form">';
         $output .= '<input type="text" name="message" value="" placeholder="' . get_string('say_something', 'local_chat') . '" id="message" />';
-        $output .= '<i class="fa fa-paper-plane" title="Send message" onclick="chat_save_message();"></i>';
+        //$output .= '<i class="fa fa-paper-plane" title="Send message" onclick="chat_save_message();"></i>';
+        $output .= '<i class="fa block_chat_button_send" id="id_block_chat_button_send" title="Enviar mensaje" onclick="chat_save_message();">Enviar</i>';
         $output .= '</div>';
         $output .= '</div>';
         $output .= '</div>';
